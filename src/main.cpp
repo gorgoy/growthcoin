@@ -950,6 +950,8 @@ int64 GetProofOfWorkReward(int nHeight, int64 nFees, uint256 prevHash)
 	long seed = hex2long(cseed);
 	int rand = generateMTRandom(seed, 8000);
 
+	// printf(">>> nHeight = %d, Rand = %d\n", nHeight, rand);
+
 	if(rand > 5000 && rand < 5101)		// 1/80
 	{
 		cseed_str = prevHash.ToString().substr(10,7);
@@ -974,9 +976,10 @@ int64 GetProofOfStakeReward(int64 nCoinAge, unsigned int nBits, unsigned int nTi
 	nRewardCoinYear = MAX_MINT_PROOF_OF_STAKE;
 
     int64 nSubsidy = nCoinAge * nRewardCoinYear / 365;
-	if(GetAdjustedTime() > RWD_SWITCH_TIME)
+	if(nTime > RWD_SWITCH_TIME)
 		nSubsidy /= 100;
 
+	// printf("nSubsidy=%"PRI64d", nCoinAge=%"PRI64d", nRewardCoinYear=%"PRI64d", \n", nSubsidy, nCoinAge, nRewardCoinYear);
     if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfStakeReward(): create=%s nCoinAge=%"PRI64d" nBits=%d\n", FormatMoney(nSubsidy).c_str(), nCoinAge, nBits);
     return nSubsidy;
@@ -3895,6 +3898,7 @@ CBlock* CreateNewBlock(CWallet* pwallet, bool fProofOfStake)
 
     if (fProofOfStake)  // attempt to find a coinstake
     {
+		// printf(">> CreateNewBlock: fProofOfStake true\n");
         pblock->nBits = GetNextTargetRequired(pindexPrev, true);
         CTransaction txCoinStake;
         int64 nSearchTime = txCoinStake.nTime; // search to current time

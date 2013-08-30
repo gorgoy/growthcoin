@@ -20,8 +20,15 @@ unsigned int nModifierInterval = MODIFIER_INTERVAL;
 // Hard checkpoints of stake modifiers to ensure they are deterministic
 static std::map<int, unsigned int> mapStakeModifierCheckpoints =
     boost::assign::map_list_of
-    ( 0, 0x0e00670bu )
-    ;
+    (     0, 0x0e00670bu )
+    (  1000, 0x4adfae08u )
+    (  7000, 0x4d1d36e5u )
+	( 14964, 0x57db7e82u )
+	( 22833, 0x44573344u )
+	( 34430, 0x37232cd1u )
+	( 44723, 0x4407676du )
+	( 52261, 0xc343f31eu )
+	;
 
 // Get the last stake modifier and its generation time from a given block
 static bool GetLastStakeModifier(const CBlockIndex* pindex, uint64& nStakeModifier, int64& nModifierTime)
