@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Gorgoy
+Comment=Gorgoy P2P Cryptocurrency
+Comment[fr]=Gorgoy, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Gorgoy, eşten eşe kriptografik sanal para birimi
+Exec=/usr/bin/gorgoy-qt
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/bitcoin80.xpm
+MimeType=x-scheme-handler/gorgoy;
+Categories=Office;
